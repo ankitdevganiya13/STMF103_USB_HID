@@ -46,26 +46,7 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
-typedef struct
-{
-	uint8_t MODIFIER;
-	uint8_t RESERVED;
-	uint8_t KEYCODE1;
-	uint8_t KEYCODE2;
-	uint8_t KEYCODE3;
-	uint8_t KEYCODE4;
-	uint8_t KEYCODE5;
-	uint8_t KEYCODE6;
-	uint8_t KEYCODE7;
-	uint8_t KEYCODE8;
-	uint8_t KEYCODE9;
-	uint8_t KEYCODE10;
-	uint8_t KEYCODE11;
-	uint8_t KEYCODE12;
-	uint8_t KEYCODE13;
-}subKeyBoard;
-
-subKeyBoard keyBoardHIDsub = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+char msg_buff[100]={0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -112,7 +93,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-
+  sprintf(msg_buff,"Hii, This is Ankit Devganiya from AUM DIA TECHNOLOGIES\n\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,37 +101,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  keyBoardHIDsub.MODIFIER=0x02;   // Print char in capital
-	  keyBoardHIDsub.KEYCODE1=0x04;   // Print 'A'
-	  keyBoardHIDsub.KEYCODE2=0x18;   // Print 'U'
-	  keyBoardHIDsub.KEYCODE3=0x10;   // Print 'M'
-	  keyBoardHIDsub.KEYCODE4=0x2C;   // Print 'B'SPACE'
-	  keyBoardHIDsub.KEYCODE5=0x07;   // Print 'D'
-	  keyBoardHIDsub.KEYCODE6=0x0C;   // Print 'I'
-	  keyBoardHIDsub.KEYCODE7=0x04;   // Print 'A'
-	  keyBoardHIDsub.KEYCODE8=0x2C;   // Print 'B'SPACE'
-	  keyBoardHIDsub.KEYCODE9=0x17;   // Print 'T'
-	  keyBoardHIDsub.KEYCODE10=0x08;   // Print 'E'
-	  keyBoardHIDsub.KEYCODE11=0x06;   // Print 'C'
-	  keyBoardHIDsub.KEYCODE12=0x0B;   // Print 'H'
-	  keyBoardHIDsub.KEYCODE13=0x2C;   // Print 'B'SPACE'
-	  USBD_HID_SendReport(&hUsbDeviceFS,&keyBoardHIDsub,sizeof(keyBoardHIDsub));
-	  HAL_Delay(50);
-	  keyBoardHIDsub.MODIFIER=0x02;   // ABCABCRelease Shift
-	  keyBoardHIDsub.KEYCODE1=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE2=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE3=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE4=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE5=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE6=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE7=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE8=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE9=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE10=0x00;  // Release Key
-	  keyBoardHIDsub.KEYCODE11=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE12=0x00;   // Release Key
-	  keyBoardHIDsub.KEYCODE13=0x00;   // Release Key
-	  USBD_HID_SendReport(&hUsbDeviceFS,&keyBoardHIDsub,sizeof(keyBoardHIDsub));
+
+	  //USBD_HID_SendReport(&hUsbDeviceFS,&keyBoardHIDsub,sizeof(keyBoardHIDsub));
+	  KeyBoardPrint(msg_buff,strlen(msg_buff));
 	  HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
