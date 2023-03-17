@@ -17,7 +17,7 @@ typedef struct
 
 subKeyBoard keyBoardHIDsub = {0,0,0,0,0,0,0,0};
 
-void KeyBoardPrint(char *data,uint16_t length)
+void KeyBoard_show(char *data,uint16_t length)
 {
 	for(uint16_t count=0;count<length;count++)
 	{

@@ -46,7 +46,7 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
-char msg_buff[100]={0};
+char buffer[100]={0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -93,7 +93,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-  sprintf(msg_buff,"Hii, This is Ankit Devganiya from AUM DIA TECHNOLOGIES\n\n");
+  sprintf(buffer,"Hii, This is Ankit Devganiya, Embedded Engineer\n\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -103,7 +103,7 @@ int main(void)
     /* USER CODE END WHILE */
 
 	  //USBD_HID_SendReport(&hUsbDeviceFS,&keyBoardHIDsub,sizeof(keyBoardHIDsub));
-	  KeyBoardPrint(msg_buff,strlen(msg_buff));
+	  KeyBoard_show(buffer,strlen(buffer));
 	  HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
